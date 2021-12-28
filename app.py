@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request, abort, send_file
 from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import *#MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
 from utils import send_text_message
@@ -31,7 +31,7 @@ machine = TocMachine(
         {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
     ],
     initial="user",
-    auto_transitions=False,
+    auto_transitions=True,#False
     show_conditions=True,
 )
 
@@ -114,10 +114,10 @@ def show_fsm():
     machine.get_graph().draw("fsm.png", prog="dot", format="png")
     return send_file("fsm.png", mimetype="image/png")
 
-@parser.add(MessageEvent, message=TextMessage)
+"""@parser.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token,message)
+    line_bot_api.reply_message(event.reply_token,message)"""
 
 if __name__ == "__main__":
     port = os.environ.get("PORT", 8000)
