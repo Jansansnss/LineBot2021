@@ -50,7 +50,7 @@ if channel_access_token is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
-
+line_bot_api.push_message('U80e435170a374fb9947bef3d5d6a571e', TextSendMessage(text='你可以開始了'))
 
 @app.route("/callback", methods=["POST"])
 def callback():
