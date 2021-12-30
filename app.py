@@ -129,5 +129,5 @@ if __name__ == "__main__":
     port = os.environ.get("PORT", 8000)
     app.run(host="0.0.0.0", port=port, debug=True)#2 u can start
 
-    server = pywsgi.WSGIServer(('0.0.0.0', 12345), app)
-    server.serve_forever()
+    """server = pywsgi.WSGIServer(('0.0.0.0', 12345), app)
+    server.serve_forever()"""
