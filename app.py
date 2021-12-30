@@ -9,6 +9,7 @@ from linebot.models import *#MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
 from utils import send_text_message
+from gevent import pywsgi
 
 load_dotenv()
 
@@ -126,4 +127,7 @@ def handle_message(event):
 
 if __name__ == "__main__":
     port = os.environ.get("PORT", 8000)
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=True)#2 u can start
+
+    server = pywsgi.WSGIServer(('0.0.0.0', 12345), app)
+    server.serve_forever()
