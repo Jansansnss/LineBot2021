@@ -37,6 +37,7 @@ machine = TocMachine(
 )
 
 app = Flask(__name__, static_url_path="")
+app.config['ENV'] = 'development'
 
 
 # get channel_secret and channel_access_token from your environment variable
