@@ -37,7 +37,7 @@ machine = TocMachine(
 )
 
 app = Flask(__name__, static_url_path="")
-app.config['ENV'] = 'production'
+#app.config['ENV'] = 'production'
 
 
 # get channel_secret and channel_access_token from your environment variable
@@ -54,6 +54,8 @@ line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 print("U can start!")
 line_bot_api.push_message('U80e435170a374fb9947bef3d5d6a571e', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('Ue038cc7b82e7b48e81b78b525ce6cbf1', TextSendMessage(text='振嘉比你帥'))
+
 
 @app.route("/callback", methods=["POST"])
 def callback():
