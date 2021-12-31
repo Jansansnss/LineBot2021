@@ -81,9 +81,9 @@ def callback():
         #print(event)
         #webhook_handler()
 
-        if body["events"][0]['source']['userId']=='Ue038cc7b82e7b48e81b78b525ce6cbf1':
+        if event[0]['source']['userId']=='Ue038cc7b82e7b48e81b78b525ce6cbf1':
             line_bot_api.reply_message(
-            event.reply_token, TextSendMessage("518閉嘴讓我靜靜")
+            event.reply_token, TextSendMessage(text="518閉嘴讓我靜靜")
         )
 
         line_bot_api.reply_message(
