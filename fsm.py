@@ -46,7 +46,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger united_state")
-        #self.go_back()
+        self.go_back()
 
     def on_exit_united_state(self):
         print("Leaving united_state")
