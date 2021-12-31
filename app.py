@@ -15,7 +15,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "state1", "state2","united_state"],
     transitions=[
         {
             "trigger": "advance",
@@ -29,7 +29,14 @@ machine = TocMachine(
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "state1",
+            "dest": "united_state",
+            "conditions": "is_going_to_united_state",
+        },
+
+        {"trigger": "go_back", "source": ["state1","united_state"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -81,12 +88,18 @@ def callback():
         #print(event)
         #webhook_handler()
 
-        print(event.source['userId'])
 
-        if event.source['userId']=='Ue038cc7b82e7b48e81b78b525ce6cbf1':
+        """if event.source['userId']=='Ue038cc7b82e7b48e81b78b525ce6cbf1':
             line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="518閉嘴讓我靜靜")
-        )
+        )"""
+
+        print(f"\nFSM STATE: {machine.state}")
+        print(f"REQUEST BODY: \n{body}")
+        response = machine.advance(event)
+        print(f"\nFSM STATE: {machine.state}")
+        if response == False:
+            send_text_message(event.reply_token, "Not Entering any State")
 
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text)
