@@ -13,7 +13,7 @@ from utils import send_text_message
 
 load_dotenv()
 
-
+machines = {}
 machine = TocMachine(
     states=["user", "state1", "state2","united_state"],
     transitions=[
@@ -97,7 +97,6 @@ def callback():
             line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="518閉嘴讓我靜靜")
         )"""
-
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
@@ -112,7 +111,7 @@ def callback():
     return "OK"
 
 
-@app.route("/webhook", methods=["POST"])
+"""@app.route("/webhook", methods=["POST"])
 def webhook_handler():
     signature = request.headers["X-Line-Signature"]
     # get request body as text
@@ -140,6 +139,7 @@ def webhook_handler():
             send_text_message(event.reply_token, "Not Entering any State")
 
     return "OK"
+    """
 
 
 @app.route("/show-fsm", methods=["GET"])
