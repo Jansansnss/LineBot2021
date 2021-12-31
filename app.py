@@ -31,7 +31,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": "state1",
+            "source": "state2",
             "dest": "united_state",
             "conditions": "is_going_to_united_state",
         },
