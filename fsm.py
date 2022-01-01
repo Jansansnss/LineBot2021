@@ -1,5 +1,5 @@
 from transitions.extensions import GraphMachine
-
+from database import insert_data,print_data,update_data,delete_data
 from utils import send_text_message
 
 
@@ -15,11 +15,15 @@ class TocMachine(GraphMachine):
     def is_going_to_state2(self, event):
         text = event.message.text
         return text.lower() == "go to state2"
-    #
+    ##
     def is_going_to_united_state(self, event):
         text = event.message.text
         return text.lower() == "go to united_state"
-    #
+
+    def is_going_to_P_name(self, event):
+        text = event.message.text
+        return text.lower() == "go to P_name"
+    ##
     def on_enter_state1(self, event):
         print("I'm entering state1")
         reply_token = event.reply_token
@@ -38,8 +42,7 @@ class TocMachine(GraphMachine):
     def on_exit_state2(self,a):
         print("Leaving state2")
     
-    #
-
+    ##
     def on_enter_united_state(self, event):
         print("I'm entering united_state")
         reply_token = event.reply_token
@@ -48,4 +51,13 @@ class TocMachine(GraphMachine):
 
     def on_exit_united_state(self):
         print("Leaving united_state")
-    #
+
+    def on_enter_P_name(self, event):
+        print("I'm entering P_name")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "Trigger P_name")
+        self.go_back()
+
+    def on_exit_P_name(self):
+        print("Leaving P_name")
+    ##

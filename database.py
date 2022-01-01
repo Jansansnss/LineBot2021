@@ -1,8 +1,8 @@
-import os
+#import os
 import psycopg2
 
 def insert_data(table_name,table_columns,records):
-    DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
+    #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
     conn   = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
     #records = ('Jason', 60, 180, '2021-08-26')
@@ -22,7 +22,7 @@ def insert_data(table_name,table_columns,records):
     return
 
 def print_data(table_name,table_columns):
-    DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
+    #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
     conn   = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
     postgres_print_query = f"""Select {table_columns} from {table_name}"""
@@ -46,7 +46,7 @@ def print_data(table_name,table_columns):
     return
 
 def update_data(table_name,table_columns,origin_data,new_data):
-    DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
+    #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
     postgres_update_query = f"""UPDATE {table_name} set {table_columns} = %s WHERE {table_columns} = %s"""
@@ -61,7 +61,7 @@ def update_data(table_name,table_columns,origin_data,new_data):
     return
 
 def delete_data(table_name,user_id):
-    DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
+    #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
     postgres_delete_query = f"""DELETE FROM {table_name} WHERE user_id = {user_id}"""

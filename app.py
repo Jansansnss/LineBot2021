@@ -15,7 +15,7 @@ load_dotenv()
 
 machines = {}
 machine = TocMachine(
-    states=["user", "state1", "state2","united_state"],
+    states=["user", "state1", "state2","united_state","P_name"],
     transitions=[
         {
             "trigger": "advance",
@@ -40,7 +40,13 @@ machine = TocMachine(
             "source": "united_state",
             "dest": "united_state",
         },
-        {"trigger": "go_back", "source": ["state1","united_state"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "P_name",
+            "conditions": "is_going_to_united_state",
+        },
+        {"trigger": "go_back", "source": ["state1","united_state","P_name"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -52,8 +58,8 @@ app = Flask(__name__, static_url_path="")
 
 
 # get channel_secret and channel_access_token from your environment variable
-channel_secret = os.getenv("LINE_CHANNEL_SECRET", None)
-channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
+#channel_secret = os.getenv("LINE_CHANNEL_SECRET", None)
+#channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
 if channel_secret is None:
     print("Specify LINE_CHANNEL_SECRET as environment variable.")
     sys.exit(1)
@@ -64,8 +70,8 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 print("U can start!")
-line_bot_api.push_message('U80e435170a374fb9947bef3d5d6a571e', TextSendMessage(text='你可以開始了'))
-line_bot_api.push_message('Ue038cc7b82e7b48e81b78b525ce6cbf1', TextSendMessage(text='振嘉比你帥'))
+#line_bot_api.push_message('U80e435170a374fb9947bef3d5d6a571e', TextSendMessage(text='你可以開始了'))
+#line_bot_api.push_message('Ue038cc7b82e7b48e81b78b525ce6cbf1', TextSendMessage(text='振嘉比你帥'))
 
 
 @app.route("/callback", methods=["POST"])
