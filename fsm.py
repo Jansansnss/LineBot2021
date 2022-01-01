@@ -55,6 +55,7 @@ class TocMachine(GraphMachine):
     def on_enter_P_name(self, event):
         print("I'm entering P_name")
         reply_token = event.reply_token
+        print_data('pokemon','*')
         send_text_message(reply_token, "Trigger P_name")
         self.go_back()
 

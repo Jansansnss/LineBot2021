@@ -44,7 +44,7 @@ machine = TocMachine(
             "trigger": "advance",
             "source": "user",
             "dest": "P_name",
-            "conditions": "is_going_to_united_state",
+            "conditions": "is_going_to_P_name",
         },
         {"trigger": "go_back", "source": ["state1","united_state","P_name"], "dest": "user"},
     ],
