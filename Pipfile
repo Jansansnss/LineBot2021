@@ -14,4 +14,4 @@ Flask = "==1.0.2"
 python-psycopg2 = "==2.9.3"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
