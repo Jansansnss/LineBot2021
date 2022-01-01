@@ -1,4 +1,4 @@
-#import os
+import os
 import psycopg2
 
 def insert_data(table_name,table_columns,records):
