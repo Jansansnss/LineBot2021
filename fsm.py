@@ -35,6 +35,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_state2(self, event):
         print("I'm entering state2")
+        print_data('pokemon','*')
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state2")
         #self.go_back()
