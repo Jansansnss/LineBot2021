@@ -1,6 +1,6 @@
 from transitions.extensions import GraphMachine
 from database import insert_data,print_data,update_data,delete_data
-from utils import send_text_message
+from utils import send_text_message,send_multiple_text_message
 
 
 class TocMachine(GraphMachine):
@@ -66,5 +66,18 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         #print_data('pokemon','*')
         print_data('pokemon',event.message.text)
-        send_text_message(reply_token, "Trigger search")
+        send_multiple_text_message(reply_token, "Trigger search",print_data('pokemon',event.message.text),"","","")
+        self.go_back()
+
+
+
+    def is_going_to_developer_mode(self, event):
+        text = event.message.text
+        return text.lower() == "Jans is handsome"
+
+    def on_enter_developer_mode(self, event):
+        print("I'm entering developer_mode")
+        reply_token = event.reply_token
+        #print_data('pokemon','*')
+        send_text_message(reply_token, "Trigger developer_mode")
         self.go_back()

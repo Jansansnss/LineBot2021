@@ -23,11 +23,11 @@ def insert_data(table_name,table_columns,records):
     conn.close()
     return
 
-def print_data(table_name,table_columns):
+def print_data(table_name,table_columns,name):
     #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
     conn   = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
-    postgres_print_query = f"""Select {table_columns} from {table_name}"""
+    postgres_print_query = f"""Select {table_columns} from {table_name} where name = {name}"""
     print(postgres_print_query)
     try:
         cursor.execute(postgres_print_query)
@@ -37,15 +37,16 @@ def print_data(table_name,table_columns):
             temp = cursor.fetchone()
             if temp:
                 data.append(temp)
-                print(temp)
+                #print(temp)
             else:
                 break
         print(data)
     except:
         print("print_data_errorororororororororororor")
+        return "invalid search"
     cursor.close()
     conn.close()
-    return
+    return data
 
 def update_data(table_name,table_columns,origin_data,new_data):
     #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
@@ -72,5 +73,17 @@ def delete_data(table_name,user_id):
         conn.commit()
     except:
         print("delete_data_errorororororororororororor")
+    cursor.close()
+    conn.close()
+
+def developer_data_mode(instruction):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cursor = conn.cursor()
+    postgres_delete_query = f"""{instruction}"""
+    try:
+        cursor.execute(postgres_delete_query)
+        conn.commit()
+    except:
+        print("developer_data_mode_errorororororororororororor")
     cursor.close()
     conn.close()
