@@ -1,5 +1,5 @@
 from transitions.extensions import GraphMachine
-from database import insert_data,print_data,update_data,delete_data
+from database import *
 from utils import send_text_message,send_multiple_text_message
 
 
@@ -100,6 +100,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_help(self, event):
         print("I'm entering help")
+        developer_data_mode(event.message.text)
         reply_token = event.reply_token
         send_text_message(reply_token, "\"go to pokemon_name\" and type pokemon's name(should be capitalized) to search")
         self.go_back()
