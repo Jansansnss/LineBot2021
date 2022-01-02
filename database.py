@@ -43,10 +43,12 @@ def print_data(name):
         print(data)
     except:
         print("print_data_errorororororororororororor")
-        return "invalid search"
+        
     cursor.close()
     conn.close()
     message = f"""{data}"""
+    if data==[]:
+        return "invalid search"
     return message
 
 def update_data(table_name,table_columns,origin_data,new_data):
@@ -82,6 +84,7 @@ def developer_data_mode(instruction):
     cursor = conn.cursor()
     postgres_delete_query = f"""{instruction}"""
     try:
+        print(postgres_delete_query)
         cursor.execute(postgres_delete_query)
         conn.commit()
     except:
