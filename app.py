@@ -15,26 +15,8 @@ load_dotenv()
 
 machines = {}
 machine = TocMachine(
-    states=["user", "state1", "state2","united_state","pokemon_name","search","developer","sql","help"],
+    states=["user","pokemon_name","search","developer","sql","help"],
     transitions=[
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
-        },
-        {
-            "trigger": "advance",
-            "source": "state2",
-            "dest": "united_state",
-            "conditions": "is_going_to_united_state",
-        },
         {
             "trigger": "advance",
             "source": "user",
@@ -65,12 +47,34 @@ machine = TocMachine(
             "dest": "help",
             "conditions": "is_going_to_help",
         },
-        {"trigger": "go_back", "source": ["state1","united_state","search","sql","help"], "dest": "user"},
+        {"trigger": "go_back", "source": ["search","sql","help"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
     show_conditions=True,
 )
+
+"""
+"state1", "state2","united_state"
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "state1",
+            "conditions": "is_going_to_state1",
+        },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "state2",
+            "conditions": "is_going_to_state2",
+        },
+        {
+            "trigger": "advance",
+            "source": "state2",
+            "dest": "united_state",
+            "conditions": "is_going_to_united_state",
+        },
+"""
 
 app = Flask(__name__, static_url_path="")
 #app.config['ENV'] = 'production'

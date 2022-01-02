@@ -46,9 +46,10 @@ def print_data(name):
         
     cursor.close()
     conn.close()
-    message = f"""{data}"""
+
     if data==[]:
         return "invalid search"
+    message = f"""Name :{data[0][0]}\n'Type1' :{data[0][1]}\n'Type2' :{data[0][2]}\n'Total' :{data[0][3]}\n'HP' :{data[0][4]}\n'Attack' :{data[0][5]}\n'Defense' :{data[0][6]}\n'Sp_Atk' :{data[0][7]}\n'Sp_Def' :{data[0][8]}\n'Speed' :{data[0][9]}\n'Generation' :{data[0][10]}\n'Legendary' :{data[0][11]}\n"""
     return message
 
 def update_data(table_name,table_columns,origin_data,new_data):
