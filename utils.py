@@ -26,6 +26,7 @@ def send_multiple_text_message(reply_token, text1,text2,text3,text4,text5):
     return "OK"
 
 
+
 """
 def send_image_url(id, img_url):
     pass
