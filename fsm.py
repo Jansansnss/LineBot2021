@@ -20,9 +20,9 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "go to united_state"
 
-    def is_going_to_P_name(self, event):
+    def is_going_to_p_name(self, event):
         text = event.message.text
-        return text.lower() == "go to P_name"
+        return text.lower() == "go to p_name"
     ##
     def on_enter_state1(self, event):
         print("I'm entering state1")
@@ -35,13 +35,10 @@ class TocMachine(GraphMachine):
 
     def on_enter_state2(self, event):
         print("I'm entering state2")
-        print_data('pokemon','*')
+        #print_data('pokemon','*')
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state2")
         #self.go_back()
-
-    def on_exit_state2(self,a):
-        print("Leaving state2")
     
     ##
     def on_enter_united_state(self, event):
@@ -50,16 +47,17 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, "Trigger united_state")
         self.go_back()
 
-    def on_exit_united_state(self):
-        print("Leaving united_state")
-
-    def on_enter_P_name(self, event):
-        print("I'm entering P_name")
+    def on_enter_p_name(self, event):
+        print("I'm entering p_name")
         reply_token = event.reply_token
-        print_data('pokemon','*')
-        send_text_message(reply_token, "Trigger P_name")
+        #print_data('pokemon','*')
+        send_text_message(reply_token, "Trigger p_name")
+    
+    def on_enter_search(self, event):
+        print("I'm entering search")
+        reply_token = event.reply_token
+        #print_data('pokemon','*')
+        print_data('pokemon',event.message.text)
+        send_text_message(reply_token, "Trigger search")
         self.go_back()
-
-    def on_exit_P_name(self):
-        print("Leaving P_name")
     ##

@@ -15,7 +15,7 @@ load_dotenv()
 
 machines = {}
 machine = TocMachine(
-    states=["user", "state1", "state2","united_state","P_name"],
+    states=["user", "state1", "state2","united_state","p_name","search"],
     transitions=[
         {
             "trigger": "advance",
@@ -43,10 +43,15 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "P_name",
-            "conditions": "is_going_to_P_name",
+            "dest": "p_name",
+            "conditions": "is_going_to_p_name",
         },
-        {"trigger": "go_back", "source": ["state1","united_state","P_name"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "p_name",
+            "dest": "search",
+        },
+        {"trigger": "go_back", "source": ["state1","united_state","p_name"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -109,35 +114,6 @@ def callback():
         print(f"\nFSM STATE: {machine.state}")
         if response == False:
             send_text_message(event.reply_token, "Not Entering any State")
-
-        quick_reply ={
-                        "type": "text",
-                        "text": "你居住在台灣的哪個縣市?",
-                        "quickReply": {
-                            "items": [
-                            {
-                                "type": "action",
-                                "imageUrl": "",
-                                "action": {
-                                "type": "message",
-                                "label": "1",
-                                "text": "go to state1"
-                                }
-                            },
-                            {
-                                "type": "action",
-                                "imageUrl": "",
-                                "action": {
-                                "type": "message",
-                                "label": "2",
-                                "text": "go to state2"
-                            }
-                        },
-                    ]
-                }
-            }
-
-        send_text_message(event.reply_token,quick_reply)
 
         """line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text)
