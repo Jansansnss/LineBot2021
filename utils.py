@@ -20,6 +20,7 @@ def send_multiple_text_message(reply_token, text1,text2,text3,text4,text5):
     reply_arr.append( TextSendMessage(text=text3) )
     reply_arr.append( TextSendMessage(text=text4) )
     reply_arr.append( TextSendMessage(text=text5) )
+    line_bot_api = LineBotApi(channel_access_token)
     line_bot_api.reply_message( reply_token, reply_arr )
 
     return "OK"

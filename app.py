@@ -121,7 +121,7 @@ def callback():
         response = machine.advance(event)
         print(f"\nFSM STATE: {machine.state}")
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+            send_text_message(event.reply_token, "Insert help for instructions")
 
         """line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text)
