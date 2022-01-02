@@ -71,15 +71,26 @@ class TocMachine(GraphMachine):
 
 
 
-    def is_going_to_developer_mode(self, event):
+    def is_going_to_developer(self, event):
         text = event.message.text
         return text.lower() == "Jans is handsome"
 
-    def on_enter_developer_mode(self, event):
-        print("I'm entering developer_mode")
+    def on_enter_developer(self, event):
+        print("I'm entering developer")
         reply_token = event.reply_token
         #print_data('pokemon','*')
-        send_text_message(reply_token, "Trigger developer_mode")
+        send_text_message(reply_token, "Trigger developer")
+
+
+
+    def is_going_to_sql(self, event):
+        text = event.message.text
+        return text.lower() == "help"
+
+    def on_enter_help(self, event):
+        print("I'm entering sql")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "*WARNING* any changes may damage database")
         self.go_back()
 
 
@@ -91,5 +102,5 @@ class TocMachine(GraphMachine):
     def on_enter_help(self, event):
         print("I'm entering help")
         reply_token = event.reply_token
-        send_text_message(reply_token, "\"go to pokemon_name\" and type pokemon's name to search\n")
+        send_text_message(reply_token, "\"go to pokemon_name\" and type pokemon's name(should be capitalized) to search")
         self.go_back()

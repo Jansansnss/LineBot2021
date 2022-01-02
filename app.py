@@ -15,7 +15,7 @@ load_dotenv()
 
 machines = {}
 machine = TocMachine(
-    states=["user", "state1", "state2","united_state","pokemon_name","search","developer_mode","help"],
+    states=["user", "state1", "state2","united_state","pokemon_name","search","developer","sql","help"],
     transitions=[
         {
             "trigger": "advance",
@@ -50,8 +50,14 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "developer_mode",
-            "conditions": "is_going_to_developer_mode",
+            "dest": "developer",
+            "conditions": "is_going_to_developer",
+        },
+        {
+            "trigger": "advance",
+            "source": "developer",
+            "dest": "sql",
+            "conditions": "is_going_to_sql",
         },
         {
             "trigger": "advance",
@@ -59,7 +65,7 @@ machine = TocMachine(
             "dest": "help",
             "conditions": "is_going_to_help",
         },
-        {"trigger": "go_back", "source": ["state1","united_state","search","developer_mode","help"], "dest": "user"},
+        {"trigger": "go_back", "source": ["state1","united_state","search","sql","help"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
