@@ -80,6 +80,7 @@ def delete_data(table_name,user_id):
     conn.close()
 
 def developer_data_mode(instruction):
+    print("????")
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
     postgres_delete_query = f"""{instruction}"""
