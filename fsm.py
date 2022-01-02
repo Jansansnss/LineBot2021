@@ -66,7 +66,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         #print_data('pokemon','*')
         print_data(event.message.text)
-        send_multiple_text_message(reply_token, "Trigger search",print_data(event.message.text),"","","")
+        send_text_message(reply_token,print_data(event.message.text))
         self.go_back()
 
 
