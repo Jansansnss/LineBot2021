@@ -25,5 +25,7 @@ Deploy on: Heroku
 #### - sql
 * this is where the developer(I or whoever gets the permission) is able to maintain the database without lots of complicated formalities, just simply type sql program instructions.
 
-#### contact the author for more detail:
+![line](./img/line.png)
+
+#### contact the author for more details:
 jansansnss@gmail.com
