@@ -88,6 +88,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_sql(self, event):
         print("I'm entering sql")
+        developer_data_mode(event.message.text)
         reply_token = event.reply_token
         send_text_message(reply_token, "**WARNING**\nany changes may damage database")
         self.go_back()
@@ -100,7 +101,6 @@ class TocMachine(GraphMachine):
 
     def on_enter_help(self, event):
         print("I'm entering help")
-        developer_data_mode(event.message.text)
         reply_token = event.reply_token
         send_text_message(reply_token, "\"go to pokemon_name\" and type pokemon's name(should be capitalized) to search")
         self.go_back()
