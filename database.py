@@ -27,7 +27,7 @@ def print_data(name):
     #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
     conn   = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
-    postgres_print_query = f"""SELECT * FROM pokemon WHERE Name = {name}"""
+    postgres_print_query = f"""SELECT * FROM pokemon WHERE Name = \'{name}\'"""
     print(postgres_print_query)
     try:
         cursor.execute(postgres_print_query)
