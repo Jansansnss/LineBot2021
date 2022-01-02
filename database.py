@@ -23,11 +23,11 @@ def insert_data(table_name,table_columns,records):
     conn.close()
     return
 
-def print_data(table_name,table_columns,name):
+def print_data(name):
     #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
     conn   = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
-    postgres_print_query = f"""Select {table_columns} from {table_name} where name = {name}"""
+    postgres_print_query = f"""Select * from pokemon where name = {name}"""
     print(postgres_print_query)
     try:
         cursor.execute(postgres_print_query)

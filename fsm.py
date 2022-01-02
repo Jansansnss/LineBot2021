@@ -65,8 +65,8 @@ class TocMachine(GraphMachine):
         print("I'm entering search")
         reply_token = event.reply_token
         #print_data('pokemon','*')
-        print_data('pokemon',event.message.text)
-        send_multiple_text_message(reply_token, "Trigger search",print_data('pokemon',event.message.text),"","","")
+        print_data(event.message.text)
+        send_multiple_text_message(reply_token, "Trigger search",print_data(event.message.text),"","","")
         self.go_back()
 
 
@@ -80,4 +80,16 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         #print_data('pokemon','*')
         send_text_message(reply_token, "Trigger developer_mode")
+        self.go_back()
+
+
+    
+    def is_going_to_help(self, event):
+        text = event.message.text
+        return text.lower() == "help"
+
+    def on_enter_help(self, event):
+        print("I'm entering help")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "No help yet")
         self.go_back()
