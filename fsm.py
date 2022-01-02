@@ -73,7 +73,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_developer(self, event):
         text = event.message.text
-        return text.lower() == "Jans is handsome"
+        return text.lower() == "jans is handsome"
 
     def on_enter_developer(self, event):
         print("I'm entering developer")
@@ -84,10 +84,9 @@ class TocMachine(GraphMachine):
 
 
     def is_going_to_sql(self, event):
-        text = event.message.text
-        return text.lower() == "help"
+        return True
 
-    def on_enter_help(self, event):
+    def on_enter_sql(self, event):
         print("I'm entering sql")
         reply_token = event.reply_token
         send_text_message(reply_token, "**WARNING**\nany changes may damage database")
