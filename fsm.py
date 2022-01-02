@@ -90,7 +90,7 @@ class TocMachine(GraphMachine):
     def on_enter_help(self, event):
         print("I'm entering sql")
         reply_token = event.reply_token
-        send_text_message(reply_token, "*WARNING* any changes may damage database")
+        send_text_message(reply_token, "**WARNING**\nany changes may damage database")
         self.go_back()
 
 
