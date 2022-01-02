@@ -46,7 +46,8 @@ def print_data(name):
         return "invalid search"
     cursor.close()
     conn.close()
-    return data
+    message = f"""{data}"""
+    return message
 
 def update_data(table_name,table_columns,origin_data,new_data):
     #DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a linebot2021-jansansnss').read()[:-1]
