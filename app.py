@@ -110,6 +110,35 @@ def callback():
         if response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
+        quick_reply ={
+                        "type": "text",
+                        "text": "你居住在台灣的哪個縣市?",
+                        "quickReply": {
+                            "items": [
+                            {
+                                "type": "action",
+                                "imageUrl": "",
+                                "action": {
+                                "type": "message",
+                                "label": "1",
+                                "text": "go to state1"
+                                }
+                            },
+                            {
+                                "type": "action",
+                                "imageUrl": "",
+                                "action": {
+                                "type": "message",
+                                "label": "2",
+                                "text": "go to state2"
+                            }
+                        },
+                    ]
+                }
+            }
+
+        send_text_message(event.reply_token,quick_reply)
+
         """line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text)
         )"""
