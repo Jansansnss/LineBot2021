@@ -91,5 +91,5 @@ class TocMachine(GraphMachine):
     def on_enter_help(self, event):
         print("I'm entering help")
         reply_token = event.reply_token
-        send_text_message(reply_token, "No help yet")
+        send_text_message(reply_token, "\"go to pokemon_name\" and type pokemon's name to search\n")
         self.go_back()
