@@ -9,7 +9,7 @@ class TocMachine(GraphMachine):
         #self.machine.get_graph().draw("myFSM.png", prog= 'dot')
 
 
-    def is_going_to_state1(self, event):
+    """def is_going_to_state1(self, event):
         text = event.message.text
         return text.lower() == "go to state1"
 
@@ -42,7 +42,7 @@ class TocMachine(GraphMachine):
         print("I'm entering united_state")
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger united_state")
-        self.go_back()
+        self.go_back()"""
 
 
 
@@ -54,7 +54,7 @@ class TocMachine(GraphMachine):
         print("I'm entering pokemon_name")
         reply_token = event.reply_token
         #print_data('pokemon','*')
-        send_text_message(reply_token, "Trigger pokemon_name")
+        send_text_message(reply_token, "Welcome\nPlz enter the pokemon's name\n(ex. Pikachu)")
 
 
 
@@ -79,7 +79,7 @@ class TocMachine(GraphMachine):
         print("I'm entering developer")
         reply_token = event.reply_token
         #print_data('pokemon','*')
-        send_text_message(reply_token, "Trigger developer")
+        send_text_message(reply_token, "Trigger developer\n**WARNING**\nany changes may damage database")
 
 
 
@@ -90,7 +90,7 @@ class TocMachine(GraphMachine):
         print("I'm entering sql")
         developer_data_mode(event.message.text)
         reply_token = event.reply_token
-        send_text_message(reply_token, "**WARNING**\nany changes may damage database")
+        send_text_message(reply_token, "Back to user mode")
         self.go_back()
 
 

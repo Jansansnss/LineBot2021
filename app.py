@@ -7,74 +7,13 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import *#MessageEvent, TextMessage, TextSendMessage
 
-from fsm import TocMachine
+from mymachine import new_machine
 from utils import send_text_message
 #from gevent import pywsgi
 
 load_dotenv()
 
 machines = {}
-machine = TocMachine(
-    states=["user","pokemon_name","search","developer","sql","help"],
-    transitions=[
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "pokemon_name",
-            "conditions": "is_going_to_pokemon_name",
-        },
-        {
-            "trigger": "advance",
-            "source": "pokemon_name",
-            "dest": "search",
-            "conditions": "is_going_to_search",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "developer",
-            "conditions": "is_going_to_developer",
-        },
-        {
-            "trigger": "advance",
-            "source": "developer",
-            "dest": "sql",
-            "conditions": "is_going_to_sql",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "help",
-            "conditions": "is_going_to_help",
-        },
-        {"trigger": "go_back", "source": ["search","sql","help"], "dest": "user"},
-    ],
-    initial="user",
-    auto_transitions=False,
-    show_conditions=True,
-)
-
-"""
-"state1", "state2","united_state"
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
-        },
-        {
-            "trigger": "advance",
-            "source": "state2",
-            "dest": "united_state",
-            "conditions": "is_going_to_united_state",
-        },
-"""
 
 app = Flask(__name__, static_url_path="")
 #app.config['ENV'] = 'production'
@@ -126,10 +65,16 @@ def callback():
             line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="518閉嘴讓我靜靜")
         )"""
-        print(f"\nFSM STATE: {machine.state}")
+        """print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
-        print(f"\nFSM STATE: {machine.state}")
+        print(f"\nFSM STATE: {machine.state}")"""
+        # Create a machine for new user
+        if event.source.user_id not in machines:
+            machines[event.source.user_id] = new_machine()
+
+        # Advance the FSM for each MessageEvent
+        response = machines[event.source.user_id].advance(event)
         if response == False:
             send_text_message(event.reply_token, "Insert help for instructions")
 
