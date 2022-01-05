@@ -104,3 +104,13 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "\"go to pokemon_name\" and type pokemon's name(should be capitalized) to search")
         self.go_back()
+
+    def is_going_to_demo(self, event):
+        text = event.message.text
+        return text.lower() == "demo"
+    
+    def on_enter_demo(self, event):
+        print("I'm entering help")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "Give me 3 points!!")
+        self.go_back()
